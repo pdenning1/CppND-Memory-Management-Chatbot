@@ -44,9 +44,71 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
-ChatBot::ChatBot(const ChatBot &source)
+
+// copy c'tor
+ChatBot::ChatBot(ChatBot &source)
 {
     std::cout << "ChatBot Copy Constructor" << std::endl;
+
+    // exclusive ownership 
+    _image = source._image;
+    source._image = NULL;
+
+    // data handles not owned
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+}
+
+// Copy Assignment Operator
+ChatBot& ChatBot::operator = (ChatBot &source)
+{
+    std::cout << "ChatBot Copy Assignment Operator" << std::endl;
+    if(this == &source)
+        return *this;
+
+    // exclusive ownership 
+    _image = source._image;
+    source._image = NULL;
+
+    // data handles not owned
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+
+    return *this;
+}
+
+ChatBot::ChatBot(ChatBot &&source)
+{
+    std::cout << "ChatBot Move Constructor" << std::endl;
+
+        // exclusive ownership 
+    _image = source._image;
+    source._image = NULL;
+
+    // data handles not owned
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+}
+
+ChatBot & ChatBot::operator =(ChatBot &&source)
+{
+        std::cout << "ChatBot Copy Assignment Operator" << std::endl;
+    if(this == &source)
+        return *this;
+
+    // exclusive ownership 
+    _image = source._image;
+    source._image = NULL;
+
+    // data handles not owned
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+
+    return *this;
 }
 ////
 //// EOF STUDENT CODE
