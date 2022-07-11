@@ -51,8 +51,7 @@ ChatBot::ChatBot(ChatBot &source)
     std::cout << "ChatBot Copy Constructor" << std::endl;
 
     // exclusive ownership 
-    _image = source._image;
-    source._image = NULL;
+    _image = new wxBitmap(*source._image);
 
     // data handles not owned
     _currentNode = source._currentNode;
@@ -70,8 +69,7 @@ ChatBot& ChatBot::operator = (ChatBot &source)
         return *this;
 
     // exclusive ownership 
-    _image = source._image;
-    source._image = NULL;
+    _image = new wxBitmap(*source._image);
 
     // data handles not owned
     _currentNode = source._currentNode;
@@ -92,8 +90,11 @@ ChatBot::ChatBot(ChatBot &&source)
 
     // data handles not owned
     _currentNode = source._currentNode;
+    source._currentNode = NULL;
     _rootNode = source._rootNode;
+    source._rootNode = NULL;
     _chatLogic = source._chatLogic;
+    source._chatLogic = NULL;
     _chatLogic->SetChatbotHandle(this);
 }
 
@@ -109,8 +110,11 @@ ChatBot & ChatBot::operator =(ChatBot &&source)
 
     // data handles not owned
     _currentNode = source._currentNode;
+    source._currentNode = NULL;
     _rootNode = source._rootNode;
+    source._rootNode = NULL;
     _chatLogic = source._chatLogic;
+    source._chatLogic = NULL;
     _chatLogic->SetChatbotHandle(this);
 
     return *this;
