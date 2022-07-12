@@ -18,10 +18,10 @@ GraphNode::~GraphNode()
     // } 
 
     // delete child edges
-    for (auto it = std::begin(_childEdges); it != std::end(_childEdges); ++it)
-    {
-        it->reset();
-    }
+    // for (auto it = std::begin(_childEdges); it != std::end(_childEdges); ++it)
+    // {
+    //     it->reset();
+    // }
 
     ////
     //// EOF STUDENT CODE
@@ -37,7 +37,7 @@ void GraphNode::AddEdgeToParentNode(GraphEdge *edge)
     _parentEdges.push_back(edge);
 }
 
-void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> &edge)
+void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge)
 {
     _childEdges.push_back(std::move(edge));
 }
